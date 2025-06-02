@@ -266,4 +266,17 @@ namespace test_vector {
 			std::cout << v << '\n';
 		});
 	}
+
+	void read_vector() {
+		base("operator >> function", []() {
+			Vector<int> v;
+			std::cout << "Enter n (the number of elements), followed by n numbers: ";
+			std::cin >> v;
+			std::cout << "Read " << v.size() << " numbers\nv: ";
+			for (size_t i = 0; i < v.size(); i++) {
+				std::cout << v[i] << ' ';
+			}
+			std::cout << '\n';
+		});
+	}
 }

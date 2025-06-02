@@ -29,5 +29,8 @@ int main() {
     std::cout << "back: " << v.back() << std::endl;
     v.front() = 7;
     std::cout << "new front: " << v.front() << std::endl;
+
+    v.clear();
+    test_vector::read_vector();
     return 0;
 }

@@ -4,6 +4,7 @@
 
 #pragma once
 #include <ostream>
+#include <istream>
 #include <cassert>
 
 // http://www.cplusplus.com/reference/vector/vector/
@@ -72,8 +73,6 @@ public:
 
     // nu inca
     // void erase(type* begin, type* end);
-    template<typename U>
-    friend std::ostream& operator<<(std::ostream& out, const Vector<U>& to_print);
 
 private:
     static constexpr unsigned int kMinCapacity = 1;
@@ -285,4 +284,14 @@ std::ostream& operator <<(std::ostream& out, const Vector<type>& to_print) {
     for (std::size_t i = 0; i < to_print.size(); i++)
         out << to_print[i] << ' ';
     return out;
+}
+
+template<class type>
+std::istream& operator >>(std::istream& in, Vector<type>& to_read) {
+    size_t n;
+    in >> n;
+    to_read.resize(n);
+    for (size_t i = 0; i < n; ++i)
+        in >> to_read[i];
+    return in;
 }
