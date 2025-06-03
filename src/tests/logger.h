@@ -10,12 +10,14 @@ class Logger {
     ~Logger() = default;
     Logger(const Logger&) = delete;
     Logger& operator=(const Logger&) = delete;
+
 public:
     static Logger& instance() {
         static Logger instance;
         return instance;
     }
 
+    void log(std::ostream &os, const std::string &what, const std::string &color);
     void print_ok(std::ostream& os, const std::string& what);
     void print_warn(std::ostream& os, const std::string& what, const std::string& warning);
     void print_error(std::ostream& os, const std::string& what, const std::string& error);

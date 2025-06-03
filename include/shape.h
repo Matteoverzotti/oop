@@ -7,15 +7,12 @@
 
 class Shape {
 protected:
-    std::string color;
+    int id;
+    static int next_id;
 public:
+    Shape();
     virtual ~Shape() = default;
     virtual double area() const = 0;
     virtual double perimeter() const = 0;
-    virtual void print(std::ostream& os) const = 0;
+    virtual void print(std::ostream& os) const;
 };
-
-inline std::ostream& operator<<(std::ostream& os, const Shape& s) {
-    s.print(os);
-    return os;
-}

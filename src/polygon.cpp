@@ -45,14 +45,15 @@ double Polygon::perimeter() const {
 }
 
 void Polygon::print(std::ostream &os) const {
-    os << "Polygon with " << points.size() << " sides:\n";
+    Shape::print(os);
+    os << "Polygon with " << points.size() << " points:\n";
     for (const auto& point : points) {
         os << "(" << point.real() << ", " << point.imag() << ")\n";
     }
+
 }
 
 std::ostream& operator<<(std::ostream &os, const Polygon &polygon) {
     polygon.print(os);
     return os;
 }
-

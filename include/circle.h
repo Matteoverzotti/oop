@@ -23,5 +23,6 @@ public:
     double perimeter() const override;
 
     void print(std::ostream &os) const override;
-
 };
+
+std::ostream& operator<<(std::ostream &os, const Circle &circle);

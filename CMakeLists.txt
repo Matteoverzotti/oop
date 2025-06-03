@@ -19,4 +19,9 @@ add_executable(Homework src/main.cpp
         src/tests/logger.cpp
         src/tests/logger.h
         src/tests/base_test.h
+        factory/shape_factory.cpp
+        factory/shape_factory.h
+        src/shape_collection.cpp
+        include/shape_collection.h
+        src/shape.cpp
 )

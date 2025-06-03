@@ -26,3 +26,5 @@ public:
 
     void print(std::ostream &os) const override;
 };
+
+std::ostream& operator<<(std::ostream &os, const Polygon &polygon);

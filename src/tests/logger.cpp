@@ -5,6 +5,10 @@
 #include "logger.h"
 #include "../../include/constants.h"
 
+void Logger::log(std::ostream &os, const std::string &what, const std::string &color = LoggerColors::RESET) {
+    os << color << "[LOG] " << what << std::endl;
+}
+
 void Logger::print_ok(std::ostream &os, const std::string &what) {
     os << LoggerColors::GREEN << "[+] Ok! " << what << " work(s)" << LoggerColors::RESET << std::endl;
 }
