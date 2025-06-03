@@ -31,7 +31,7 @@ Tema 2 trebuie să conțină (și să arate că știți să folosiți):
 - moșteniri ✅
 - funcții virtuale ✅
 - excepții (și handling de excepții) ✅
-- dynamic_cast sau static_cast => va trebui să folosiți pointeri
+- dynamic_cast sau static_cast => va trebui să folosiți pointeri ✅
 - optional: puteți include moșteniri tip diamant aici în loc de tema 3
 - **bonus points:** o clasă abstractă ✅
 
