@@ -50,5 +50,5 @@ generice.
     - adăugați (minim) o funcție normală/liberă template; poate să fie `friend` ✅
 - minim 2 design patterns (3 dacă aveți singleton sau ceva la fel de simplu și proiectul e simplu);
   - Singleton ✅ - `Logger`
-  - Factory Method
+  - Factory Method ✅ - `ShapeFactory`
   - Builder

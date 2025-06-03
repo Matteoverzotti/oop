@@ -1,6 +1,7 @@
 //
 // Created by matteoverz on 6/2/25.
 //
+#include "../factory/shape_factory.h"
 #include "../include/circle.h"
 #include "../include/rectangle.h"
 #include "../include/shape_collection.h"
@@ -21,5 +22,10 @@ int main() {
     collection.remove_shape(0);
 
     collection.print_shapes();
+
+    collection.add_shape(std::shared_ptr<Shape>(ShapeFactory::create(CIRCLE)));
+    collection.add_shape(std::shared_ptr<Shape>(ShapeFactory::create(RECTANGLE)));
+    collection.print_shapes();
+
     return 0;
 }
