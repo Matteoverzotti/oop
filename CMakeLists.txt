@@ -5,4 +5,9 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(Homework src/main.cpp
         include/vector.h
+        include/shape.h
+        src/polygon.cpp
+        include/polygon.h
+        src/rectangle.cpp
+        include/rectangle.h
 )
