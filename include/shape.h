@@ -12,6 +12,8 @@ protected:
 public:
     Shape();
     virtual ~Shape() = default;
+    int get_id() const;
+
     virtual double area() const = 0;
     virtual double perimeter() const = 0;
     virtual void print(std::ostream& os) const;

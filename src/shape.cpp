@@ -9,6 +9,10 @@ Shape::Shape(): id(next_id) {
     next_id++;
 }
 
+int Shape::get_id() const {
+    return id;
+}
+
 void Shape::print(std::ostream &os) const {
     os << "Shape ID: " << id << "\n";
     os << "Area: " << area() << "\n";
