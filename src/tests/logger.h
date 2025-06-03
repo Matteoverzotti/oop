@@ -6,10 +6,17 @@
 #include <ostream>
 
 class Logger {
+    Logger() = default;
+    ~Logger() = default;
+    Logger(const Logger&) = delete;
+    Logger& operator=(const Logger&) = delete;
 public:
-    static void print_ok(std::ostream& os, const std::string& what);
+    static Logger& instance() {
+        static Logger instance;
+        return instance;
+    }
 
-    static void print_warn(std::ostream& os, const std::string& what, const std::string& warning);
-
-    static void print_error(std::ostream& os, const std::string& what, const std::string& error);
+    void print_ok(std::ostream& os, const std::string& what);
+    void print_warn(std::ostream& os, const std::string& what, const std::string& warning);
+    void print_error(std::ostream& os, const std::string& what, const std::string& error);
 };

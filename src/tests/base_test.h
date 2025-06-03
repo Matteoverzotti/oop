@@ -9,6 +9,7 @@
 #include "logger.h"
 
 class BaseTest {
+    static Logger &logger() { return Logger::instance(); }
 protected:
     static void base(const std::string &name, auto &&test) {
         bool ok = true;
@@ -16,10 +17,10 @@ protected:
             test();
         } catch (std::exception &e) {
             ok = false;
-            Logger::print_error(std::cerr, name, e.what());
+            logger().print_error(std::cerr, name, e.what());
         }
         if (ok) {
-            Logger::print_ok(std::cerr, name);
+            logger().print_ok(std::cerr, name);
         }
     }
 };
