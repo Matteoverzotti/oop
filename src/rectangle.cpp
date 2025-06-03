@@ -6,6 +6,8 @@
 
 #include "../include/exceptions.h"
 
+Rectangle::Rectangle() : width(0), height(0) {}
+
 Rectangle::Rectangle(const double w, const double h) {
     if (w < 0 || h < 0) {
         throw InvalidDimensionsException("Width and height must be non-negative.");
@@ -22,7 +24,7 @@ double Rectangle::perimeter() const {
     return 2 * (width + height);
 }
 
-int Rectangle::numberOfSides() const {
+size_t Rectangle::numberOfSides() const {
     return 4;
 }
 

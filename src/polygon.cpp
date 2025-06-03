@@ -6,8 +6,22 @@
 
 #include <complex>
 
-int Polygon::numberOfSides() const {
-    return 0;
+Polygon::Polygon() {
+    points = std::vector<std::complex<double>>();
+}
+
+Polygon::Polygon(std::vector<std::complex<double>> points): points(std::move(points)) {
+    if (this->points.size() < 3) {
+        throw std::invalid_argument("A polygon must have at least 3 points.");
+    }
+}
+
+size_t Polygon::numberOfPoints() const {
+    return points.size();
+}
+
+size_t Polygon::numberOfSides() const {
+    return points.size();
 }
 
 double Polygon::area() const {

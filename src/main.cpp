@@ -7,9 +7,11 @@
 #include "../include/rectangle.h"
 #include "../include/vector.h"
 #include "tests/test_vector.cpp"
+#include "tests/test_shapes.cpp"
 
 int main() {
-    TestVector::test_all();
+    // TestVector::test_all();
+    TestShapes::test_all();
     // const Rectangle rect(20, 10);
     // std::cout << "Rectangle area: " << rect.area() << std::endl;
     // std::cout << "Rectangle perimeter: " << rect.perimeter() << std::endl;

@@ -7,6 +7,7 @@
 
 namespace Constants {
     const double PI = std::acos(-1);
+    constexpr double EPSILON = 1e-9;
 }
 
 namespace LoggerColors {

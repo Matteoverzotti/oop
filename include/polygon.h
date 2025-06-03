@@ -12,8 +12,13 @@ class Polygon : public Shape {
 protected:
     std::vector<std::complex<double>> points;
 public:
+    Polygon();
+    Polygon(std::vector<std::complex<double>> points);
+
     ~Polygon() override = default;
-    virtual int numberOfSides() const;
+
+    virtual size_t numberOfPoints() const;
+    virtual size_t numberOfSides() const;
 
     double area() const override;
 

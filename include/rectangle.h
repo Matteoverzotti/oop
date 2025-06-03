@@ -9,12 +9,14 @@ class Rectangle : public Polygon {
     double width, height;
 
 public:
+    Rectangle();
     Rectangle(double w, double h);
     ~Rectangle() override = default;
 
     double area() const override;
     double perimeter() const override;
-    int numberOfSides() const override;
+
+    size_t numberOfSides() const override;
     void print(std::ostream &os) const override;
 
 };
