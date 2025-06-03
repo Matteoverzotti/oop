@@ -9,7 +9,7 @@
 #include "tests/test_vector.cpp"
 
 int main() {
-    test_vector::test_all();
+    TestVector::test_all();
     // const Rectangle rect(20, 10);
     // std::cout << "Rectangle area: " << rect.area() << std::endl;
     // std::cout << "Rectangle perimeter: " << rect.perimeter() << std::endl;

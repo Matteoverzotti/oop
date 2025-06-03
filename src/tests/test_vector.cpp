@@ -3,32 +3,16 @@
 #include <string>
 #include <stdexcept>
 
-#include "logger.h"
+#include "base_test.h"
 
-namespace {
-
-}
-
-namespace test_vector {
-	void base(const std::string& name, auto&& test) {
-		bool ok = true;
-		try {
-			test();
-		} catch (std::exception& e) {
-			ok = false;
-			Logger::print_error(std::cerr, name, e.what());
-		} if (ok) {
-			Logger::print_ok(std::cerr, name);
-		}
-	}
-
-	void default_allocator() {
+class TestVector : public BaseTest {
+	static void default_allocator() {
 		base("Default allocator", []() {
 			Vector<int> v;
 		});
 	}
 
-	void sized_allocator() {
+	static void sized_allocator() {
 		base("Sized allocator", []() {
 			for (int i = 1; i < 50; i++) {
 				Vector<int> v(i);
@@ -44,7 +28,7 @@ namespace test_vector {
 		});
 	}
 
-	void sized_value_allocator() {
+	static void sized_value_allocator() {
 		base("Sized + value allocator", []() {
 			for (int i = 1; i < 50; i++) {
 				Vector<int> v(i, 25 - i);
@@ -60,7 +44,7 @@ namespace test_vector {
 		});
 	}
 
-	void random_access() {
+	static void random_access() {
 		base("Random access []", []() {
 			Vector<int> v(4);
 			v[0] = 3;
@@ -74,7 +58,7 @@ namespace test_vector {
 		});
 	}
 
-	void front_back() {
+	static void front_back() {
 		base("Front and back access", []() {
 			Vector<int> v(5);
 
@@ -100,7 +84,7 @@ namespace test_vector {
 		});
 	}
 
-	void front_back_const() {
+	static void front_back_const() {
 		base("Const front and back access", []() {
 			const Vector<int> v(5, 3);
 
@@ -114,7 +98,7 @@ namespace test_vector {
 		});
 	}
 
-	void begin_end() {
+	static void begin_end() {
 		base("Begin and end iterators", []() {
 			Vector<int> v(100);
 			int cnt = 0;
@@ -128,7 +112,7 @@ namespace test_vector {
 		});
 	}
 
-	void push_back() {
+	static void push_back() {
 		base("push_back function", []() {
 			Vector<int> v;
 			for (int i = 0; i < 15; i++) {
@@ -146,7 +130,7 @@ namespace test_vector {
 		});
 	}
 
-	void pop_back() {
+	static void pop_back() {
 		base("pop_back function", []() {
 			Vector<int> v(50);
 			for (int i = 0; i < 15; i++) {
@@ -158,7 +142,7 @@ namespace test_vector {
 		});
 	}
 
-	void clear() {
+	static void clear() {
 		base("clear function", []() {
 			Vector<int> v(50);
 			v.clear();
@@ -168,7 +152,7 @@ namespace test_vector {
 		});
 	}
 
-	void resize() {
+	static void resize() {
 		base("resize function", []() {
 			Vector<int> v;
 			v.resize(5, 3);
@@ -203,7 +187,7 @@ namespace test_vector {
 		});
 	}
 
-	void reserve() {
+	static void reserve() {
 		base("reserve function", []() {
 			Vector<int> v(5);
 			for (int i = 0; i < (int)v.size(); i++) {
@@ -232,7 +216,7 @@ namespace test_vector {
 		});
 	}
 
-	void shrink_to_fit() {
+	static void shrink_to_fit() {
 		base("shrink_to_fit function", []() {
 			Vector<int> v;
 			v.push_back(5);
@@ -246,7 +230,7 @@ namespace test_vector {
 		});
 	}
 
-	void print_vector() {
+	static void print_vector() {
 		base("operator << function", []() {
 			Vector<int> v(5);
 			std::stringstream ss;
@@ -260,7 +244,7 @@ namespace test_vector {
 		});
 	}
 
-	void read_vector() {
+	static void read_vector() {
 		base("operator >> function", []() {
 			Vector<int> v;
 			std::stringstream ss("5\n1 2 3 4 5");
@@ -276,7 +260,8 @@ namespace test_vector {
 		});
 	}
 
-	void test_all() {
+public:
+	static void test_all() {
 		default_allocator();
 		sized_allocator();
 		random_access();
@@ -295,4 +280,4 @@ namespace test_vector {
 		print_vector();
 		read_vector();
 	}
-}
+};

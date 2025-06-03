@@ -18,4 +18,5 @@ add_executable(Homework src/main.cpp
         src/tests/test_shapes.cpp
         src/tests/logger.cpp
         src/tests/logger.h
+        src/tests/base_test.h
 )

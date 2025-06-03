@@ -5,8 +5,6 @@
 #pragma once
 #include <ostream>
 
-#include "../../include/constants.h"
-
 class Logger {
 public:
     static void print_ok(std::ostream& os, const std::string& what);
