@@ -15,4 +15,7 @@ add_executable(Homework src/main.cpp
         include/circle.h
         include/constants.h
         include/exceptions.h
+        src/tests/test_shapes.cpp
+        src/tests/logger.cpp
+        src/tests/logger.h
 )

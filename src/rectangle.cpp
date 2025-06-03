@@ -4,7 +4,15 @@
 
 #include "../include/rectangle.h"
 
-Rectangle::Rectangle(const double w, const double h) : width(w), height(h) {}
+#include "../include/exceptions.h"
+
+Rectangle::Rectangle(const double w, const double h) {
+    if (w < 0 || h < 0) {
+        throw InvalidDimensionsException("Width and height must be non-negative.");
+    }
+    this->width = w;
+    this->height = h;
+}
 
 double Rectangle::area() const {
     return width * height;

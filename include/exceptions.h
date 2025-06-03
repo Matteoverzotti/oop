@@ -18,6 +18,12 @@ public:
         : ShapeException(msg) {}
 };
 
+class InvalidDimensionsException : public ShapeException {
+public:
+    explicit InvalidDimensionsException(const std::string& msg)
+        : ShapeException(msg) {}
+};
+
 class InvalidPointsException : public ShapeException {
 public:
     explicit InvalidPointsException(const std::string& msg)

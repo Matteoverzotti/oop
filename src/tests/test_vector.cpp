@@ -3,18 +3,10 @@
 #include <string>
 #include <stdexcept>
 
+#include "logger.h"
+
 namespace {
-	const std::string RED = "\033[1;31m";
-	const std::string GREEN = "\033[1;32m";
-	const std::string RESET = "\033[0m";
 
-	void print_ok(const std::string& what) {
-		std::cout << GREEN << "[+] Ok! " << what << " work(s)" << RESET << std::endl;
-	}
-
-	void print_error(const std::string& what, const std::string& error) {
-		std::cout << RED << "[!] " << what << " error: " << error << RESET << std::endl;
-	}
 }
 
 namespace test_vector {
@@ -24,9 +16,9 @@ namespace test_vector {
 			test();
 		} catch (std::exception& e) {
 			ok = false;
-			print_error(name, e.what());
+			Logger::print_error(std::cerr, name, e.what());
 		} if (ok) {
-			print_ok(name);
+			Logger::print_ok(std::cerr, name);
 		}
 	}
 
@@ -40,7 +32,7 @@ namespace test_vector {
 		base("Sized allocator", []() {
 			for (int i = 1; i < 50; i++) {
 				Vector<int> v(i);
-				if ((int)v.size() != i) {
+				if (static_cast<int>(v.size()) != i) {
 					throw std::runtime_error("Incorrect size after allocation");
 				}
 				for (int j = 0; j < i; j++) {
@@ -56,7 +48,7 @@ namespace test_vector {
 		base("Sized + value allocator", []() {
 			for (int i = 1; i < 50; i++) {
 				Vector<int> v(i, 25 - i);
-				if ((int)v.size() != i) {
+				if (static_cast<int>(v.size()) != i) {
 					throw std::runtime_error("Incorrect size after allocation");
 				}
 				for (int j = 0; j < i; j++) {
@@ -257,55 +249,50 @@ namespace test_vector {
 	void print_vector() {
 		base("operator << function", []() {
 			Vector<int> v(5);
-			std::cout << "should be: ";
+			std::stringstream ss;
 			for (int i = 0; i < 5; i++) {
 				v[i] = i * 3 + 1;
-				std::cout << v[i] << ' ';
 			}
-			std::cout << " and was: ";
-			std::cout << v << '\n';
+			ss << v;
+			if (ss.str() != "1 4 7 10 13 ") {
+				throw std::runtime_error("Incorrect output from operator <<");
+			}
 		});
 	}
 
 	void read_vector() {
 		base("operator >> function", []() {
 			Vector<int> v;
-			std::cout << "Enter n (the number of elements), followed by n numbers: ";
-			std::cin >> v;
-			std::cout << "Read " << v.size() << " numbers\nv: ";
-			for (size_t i = 0; i < v.size(); i++) {
-				std::cout << v[i] << ' ';
+			std::stringstream ss("5\n1 2 3 4 5");
+			ss >> v;
+			if (v.size() != 5) {
+				throw std::runtime_error("Incorrect size after read");
 			}
-			std::cout << '\n';
+			for (int i = 0; i < 5; i++) {
+				if (v[i] != i + 1) {
+					throw std::runtime_error("Incorrect value after read");
+				}
+			}
 		});
 	}
-}
 
-void test() {
-	test_vector::default_allocator();
-	test_vector::sized_allocator();
-	test_vector::random_access();
-	test_vector::sized_value_allocator();
-	test_vector::front_back();
-	test_vector::front_back_const();
-	test_vector::print_vector();
-	test_vector::begin_end();
-	test_vector::push_back();
-	test_vector::pop_back();
-	test_vector::clear();
-	test_vector::resize();
-	test_vector::reserve();
-	test_vector::shrink_to_fit();
+	void test_all() {
+		default_allocator();
+		sized_allocator();
+		random_access();
+		sized_value_allocator();
+		front_back();
+		front_back_const();
+		print_vector();
+		begin_end();
+		push_back();
+		pop_back();
+		clear();
+		resize();
+		reserve();
+		shrink_to_fit();
 
-	// testez push_back()
-	Vector<int> v;
-	v.push_back(5);
-	v.push_back(3);
-	std::cout << "front: " << v.front() << std::endl;
-	std::cout << "back: " << v.back() << std::endl;
-	v.front() = 7;
-	std::cout << "new front: " << v.front() << std::endl;
-
-	v.clear();
-	test_vector::read_vector();
+		print_vector();
+		read_vector();
+	}
 }
