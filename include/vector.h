@@ -47,7 +47,7 @@ public:
     Vector();
     Vector(unsigned int size);
     Vector(unsigned int size, const type& default_value);
-    Vector(const Vector<type>& other);
+    Vector(const Vector& other);
     ~Vector();
 
     unsigned int size() const;

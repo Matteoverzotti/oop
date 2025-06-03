@@ -10,4 +10,8 @@ add_executable(Homework src/main.cpp
         include/polygon.h
         src/rectangle.cpp
         include/rectangle.h
+        include/curved_shape.h
+        src/circle.cpp
+        include/circle.h
+        include/constants.h
 )
