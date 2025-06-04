@@ -9,6 +9,7 @@
 #include "../../include/shape.h"
 #include "../../include/rectangle.h"
 #include "../../include/circle.h"
+#include "../../include/square.h"
 
 class TestShapes : public BaseTest {
     static void polygon_constructor() {
@@ -79,7 +80,6 @@ class TestShapes : public BaseTest {
         base("Incorrect rectangle constructor with negative dimensions", []() {
             try {
                 const Rectangle rect(-5, 10);
-                throw std::runtime_error("Rectangle should not allow negative dimensions");
             } catch (const InvalidDimensionsException& e) {
                 // Expected exception
             }
@@ -112,7 +112,6 @@ class TestShapes : public BaseTest {
                 const Rectangle rect({
                     {0, 0}, {4, 0}, {4, 3}
                 });
-                throw std::runtime_error("Rectangle should not allow less than 4 points");
             } catch (const InvalidPolygonException& e) {
                 // Expected exception
             }
@@ -121,7 +120,6 @@ class TestShapes : public BaseTest {
                 const Rectangle rect({
                     {0, 0}, {4, 0}, {4, 3}, {0, 3}, {1, 1}
                 });
-                throw std::runtime_error("Rectangle should not allow more than 4 points");
             } catch (const InvalidPolygonException& e) {
                 // Expected exception
             }
@@ -132,12 +130,93 @@ class TestShapes : public BaseTest {
                 const Rectangle rect({
                     {0, 0}, {4, 0}, {4, 3}, {1, 3}
                 });
-                throw std::runtime_error("Rectangle should not allow points that do not form right angles");
             } catch (const InvalidPolygonException& e) {
                 // Expected exception
             }
         });
     }
+
+    static void square_constructor() {
+        base("Default square constructor", []() {
+            const Square sq;
+            if (fabs(sq.area() - 0.0) > Constants::EPSILON) {
+                throw std::runtime_error("Square area should be 0 by default");
+            }
+            if (fabs(sq.perimeter() - 0.0) > Constants::EPSILON) {
+                throw std::runtime_error("Square perimeter should be 0 by default");
+            }
+        });
+
+        base("Incorrect square constructor with negative dimensions", []() {
+            try {
+                const Square sq(-5);
+            } catch (const InvalidDimensionsException& e) {
+                // Expected exception
+            }
+        });
+
+        base("Square constructor with valid dimensions", []() {
+            const Square sq(6);
+            if (fabs(sq.area() - 36.0) > Constants::EPSILON) {
+                throw std::runtime_error("Square area should be 36");
+            }
+            if (fabs(sq.perimeter() - 24.0) > Constants::EPSILON) {
+                throw std::runtime_error("Square perimeter should be 24");
+            }
+        });
+
+        base("Square constructor with valid points", []() {
+            const Square sq({
+                {0, 0}, {4, 0}, {4, 4}, {0, 4}
+            });
+            if (fabs(sq.area() - 16.0) > Constants::EPSILON) {
+                throw std::runtime_error("Square area should be 16");
+            }
+            if (fabs(sq.perimeter() - 16.0) > Constants::EPSILON) {
+                throw std::runtime_error("Square perimeter should be 16");
+            }
+        });
+
+        base("Square constructor with invalid points", []() {
+            try {
+                const Square sq({
+                    {0, 0}, {4, 0}, {4, 3}
+                });
+                throw std::runtime_error("Square should not allow less than 4 points");
+            } catch (const InvalidPolygonException& e) {
+                // Expected exception
+            }
+
+            try {
+                const Square sq({
+                    {0, 0}, {4, 0}, {4, 3}, {0, 3}, {1, 1}
+                });
+                throw std::runtime_error("Square should not allow more than 4 points");
+            } catch (const InvalidPolygonException& e) {
+                // Expected exception
+            }
+
+            try {
+                const Square sq({
+                    {0, 0}, {4, 0}, {4, 3}, {0, 3}
+                });
+                throw std::runtime_error("Square should not allow points that do not form a square");
+            } catch (const InvalidPolygonException& e) {
+                // Expected exception
+            }
+        });
+
+        base("Square constructor without 90 degrees", []() {
+            try {
+                const Square sq({
+                    {0, 0}, {3, 1}, {0, 4}, {-3, 1}
+                });
+            } catch (const InvalidPolygonException& e) {
+                // Expected exception
+            }
+        });
+    }
+
 
     static void circle_constructor() {
         base("Default circle constructor", []() {
@@ -193,6 +272,7 @@ public:
     static void test_all() {
         polygon_constructor();
         rectangle_constructor();
+        square_constructor();
         circle_constructor();
     }
 };

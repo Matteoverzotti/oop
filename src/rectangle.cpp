@@ -68,5 +68,6 @@ size_t Rectangle::numberOfSides() const {
 }
 
 void Rectangle::print(std::ostream &os) const {
+    Polygon::print(os);
     os << "width: " << width << " heigth: " << height << '\n';
 }

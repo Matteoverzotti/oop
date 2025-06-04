@@ -28,4 +28,6 @@ add_executable(Homework src/main.cpp
         src/curved_rectangle.cpp
         include/curved_rectangle.h
         builder/curved_rectangle_builder.h
+        src/square.cpp
+        include/square.h
 )

@@ -48,7 +48,7 @@ double Circle::perimeter() const {
 
 void Circle::print(std::ostream &os) const {
     CurvedShape::print(os);
-    os << "center: " << center << " radius: " << radius;
+    os << "center: " << center << " radius: " << radius << '\n';
 }
 
 std::ostream & operator<<(std::ostream &os, const Circle &circle) {

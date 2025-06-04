@@ -11,6 +11,7 @@
 #include "../include/constants.h"
 #include "../include/curved_rectangle.h"
 #include "../include/rectangle.h"
+#include "../include/square.h"
 
 ShapeCollection::~ShapeCollection() {
     logger.log(std::cout, "ShapeCollection destructor called, deleting shapes", LoggerColors::YELLOW);
@@ -18,6 +19,12 @@ ShapeCollection::~ShapeCollection() {
         logger.log(std::cout, "Deleting shape: " + std::string(typeid(*shape).name()), LoggerColors::YELLOW);
         shape.reset();  // Explicitly reset shared_ptr to release resources
     }
+}
+
+std::shared_ptr<Shape> ShapeCollection::getShape(int id) const {
+    return *std::ranges::find_if(shapes, [id](const std::shared_ptr<Shape>& shape) {
+        return shape->get_id() == id;
+    });
 }
 
 void ShapeCollection::addShape(const std::shared_ptr<Shape>& shape) {
@@ -37,7 +44,9 @@ void ShapeCollection::removeShape(const int id) {
 
 void ShapeCollection::printShapes() const {
     for (const auto& shape : shapes) {
-        if (dynamic_cast<Rectangle*>(shape.get())) {
+        if (dynamic_cast<Square*>(shape.get())) {
+            logger.log(std::cout, "Square: " + std::to_string(shape->get_id()), LoggerColors::BLUE);
+        } else if (dynamic_cast<Rectangle*>(shape.get())) {
             logger.log(std::cout, "Rectangle: " + std::to_string(shape->get_id()), LoggerColors::BLUE);
         } else if (dynamic_cast<Circle*>(shape.get())) {
             logger.log(std::cout, "Circle: " + std::to_string(shape->get_id()), LoggerColors::BLUE);

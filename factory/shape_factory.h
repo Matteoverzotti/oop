@@ -12,6 +12,7 @@ enum ShapeType {
     CIRCLE,
     RECTANGLE,
     CURVED_RECTANGLE,
+    SQUARE,
     POLYGON
 };
 
