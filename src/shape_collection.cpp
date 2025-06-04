@@ -9,9 +9,11 @@
 
 #include "../include/circle.h"
 #include "../include/constants.h"
+#include "../include/curved_rectangle.h"
 #include "../include/rectangle.h"
 
 ShapeCollection::~ShapeCollection() {
+    logger.log(std::cout, "ShapeCollection destructor called, deleting shapes", LoggerColors::YELLOW);
     for (auto& shape : shapes) {
         logger.log(std::cout, "Deleting shape: " + std::string(typeid(*shape).name()), LoggerColors::YELLOW);
         shape.reset();  // Explicitly reset shared_ptr to release resources
@@ -39,6 +41,8 @@ void ShapeCollection::printShapes() const {
             logger.log(std::cout, "Rectangle: " + std::to_string(shape->get_id()), LoggerColors::BLUE);
         } else if (dynamic_cast<Circle*>(shape.get())) {
             logger.log(std::cout, "Circle: " + std::to_string(shape->get_id()), LoggerColors::BLUE);
+        } else if (dynamic_cast<CurvedRectangle*>(shape.get())) {
+            logger.log(std::cout, "Curved Rectangle: " + std::to_string(shape->get_id()), LoggerColors::BLUE);
         } else if (dynamic_cast<Polygon*>(shape.get())) {
             logger.log(std::cout, "Polygon: " + std::to_string(shape->get_id()), LoggerColors::BLUE);
         } else {

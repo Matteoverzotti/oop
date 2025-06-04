@@ -11,6 +11,7 @@ enum ShapeType {
     SHAPE, // Base class, not instantiable
     CIRCLE,
     RECTANGLE,
+    CURVED_RECTANGLE,
     POLYGON
 };
 

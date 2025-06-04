@@ -8,7 +8,7 @@
 
 #include "shape.h"
 
-class Polygon : public Shape {
+class Polygon : virtual public Shape {
 protected:
     std::vector<std::complex<double>> points;
 public:

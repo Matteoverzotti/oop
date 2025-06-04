@@ -32,7 +32,7 @@ Tema 2 trebuie să conțină (și să arate că știți să folosiți):
 - funcții virtuale ✅
 - excepții (și handling de excepții) ✅
 - dynamic_cast sau static_cast => va trebui să folosiți pointeri ✅
-- optional: puteți include moșteniri tip diamant aici în loc de tema 3
+- optional: puteți include moșteniri tip diamant aici în loc de tema 3 ✅ - `CurvedRectangle` <- `Rectangle` & `CurvedShape`
 - **bonus points:** o clasă abstractă ✅
 
 # Tema 3

@@ -6,6 +6,7 @@
 #include "polygon.h"
 
 class Rectangle : public Polygon {
+protected:
     double width, height;
 
 public:

@@ -25,4 +25,7 @@ add_executable(Homework src/main.cpp
         include/shape_collection.h
         src/shape.cpp
         builder/circle_builder.h
+        src/curved_rectangle.cpp
+        include/curved_rectangle.h
+        builder/curved_rectangle_builder.h
 )

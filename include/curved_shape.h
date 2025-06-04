@@ -5,7 +5,7 @@
 #pragma once
 #include "shape.h"
 
-class CurvedShape : public Shape {
+class CurvedShape : virtual public Shape {
 public:
     CurvedShape() = default;
     CurvedShape(const CurvedShape &other) = default;

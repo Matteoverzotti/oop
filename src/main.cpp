@@ -6,6 +6,7 @@
 #include "../builder/rectangle_builder.h"
 #include "../factory/shape_factory.h"
 #include "../include/circle.h"
+#include "../include/curved_rectangle.h"
 #include "../include/rectangle.h"
 #include "../include/shape_collection.h"
 #include "../include/vector.h"
@@ -30,6 +31,10 @@ int main() {
         .build();
 
     collection.addShape(std::move(poly));
+    CurvedRectangle curvedRect(4.0, 3.0, 1.0);
+    collection.addShape(std::make_shared<CurvedRectangle>(curvedRect));
+
+    collection.addShape(ShapeFactory::create(CURVED_RECTANGLE));
     collection.printShapes();
     return 0;
 }
