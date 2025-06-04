@@ -13,28 +13,6 @@
 #include "tests/test_shapes.cpp"
 
 int main() {
-    ShapeCollection collection;
-    collection.addShape(std::make_shared<Circle>(5.0));
-    collection.addShape(std::make_shared<Circle>(5.0));
-    collection.addShape(std::make_shared<Rectangle>(4.0, 6.0));
-
-    collection.addShape(ShapeFactory::create(CIRCLE));
-    collection.addShape(ShapeFactory::create(RECTANGLE));
-    collection.addShape(ShapeFactory::create(POLYGON));
-    collection.printShapes();
-
-    std::unique_ptr<Shape> poly = PolygonBuilder()
-        .addPoint({0, 0})
-        .addPoint({1, 0})
-        .addPoint({1, 1})
-        .addPoint({0, 1})
-        .build();
-
-    collection.addShape(std::move(poly));
-    CurvedRectangle curvedRect(4.0, 3.0, 1.0);
-    collection.addShape(std::make_shared<CurvedRectangle>(curvedRect));
-
-    collection.addShape(ShapeFactory::create(CURVED_RECTANGLE));
-    collection.printShapes();
+    TestShapes::test_all();
     return 0;
 }

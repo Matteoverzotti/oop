@@ -12,6 +12,7 @@ protected:
 public:
     Rectangle();
     Rectangle(double w, double h);
+    Rectangle(const std::vector<std::complex<double>> &points);
     ~Rectangle() override = default;
 
     double area() const override;

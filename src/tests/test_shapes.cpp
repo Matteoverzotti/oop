@@ -94,6 +94,49 @@ class TestShapes : public BaseTest {
                 throw std::runtime_error("Rectangle perimeter should be 30");
             }
         });
+
+        base("Rectangle constructor with points", []() {
+            const Rectangle rect({
+                {0, 0}, {4, 0}, {4, 3}, {0, 3}
+            });
+            if (fabs(rect.area() - 12.0) > Constants::EPSILON) {
+                throw std::runtime_error("Rectangle area should be 12");
+            }
+            if (fabs(rect.perimeter() - 14.0) > Constants::EPSILON) {
+                throw std::runtime_error("Rectangle perimeter should be 14");
+            }
+        });
+
+        base("Rectangle constructor with invalid points", []() {
+            try {
+                const Rectangle rect({
+                    {0, 0}, {4, 0}, {4, 3}
+                });
+                throw std::runtime_error("Rectangle should not allow less than 4 points");
+            } catch (const InvalidPolygonException& e) {
+                // Expected exception
+            }
+
+            try {
+                const Rectangle rect({
+                    {0, 0}, {4, 0}, {4, 3}, {0, 3}, {1, 1}
+                });
+                throw std::runtime_error("Rectangle should not allow more than 4 points");
+            } catch (const InvalidPolygonException& e) {
+                // Expected exception
+            }
+        });
+
+        base("Rectangle constructor without 90 degrees", []() {
+            try {
+                const Rectangle rect({
+                    {0, 0}, {4, 0}, {4, 3}, {1, 3}
+                });
+                throw std::runtime_error("Rectangle should not allow points that do not form right angles");
+            } catch (const InvalidPolygonException& e) {
+                // Expected exception
+            }
+        });
     }
 
     static void circle_constructor() {
