@@ -24,4 +24,5 @@ add_executable(Homework src/main.cpp
         src/shape_collection.cpp
         include/shape_collection.h
         src/shape.cpp
+        builder/circle_builder.h
 )

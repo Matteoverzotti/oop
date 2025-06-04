@@ -13,17 +13,17 @@
 
 ShapeCollection::~ShapeCollection() {
     for (auto& shape : shapes) {
-        logger.log(std::cout, "Deleting shape: " + std::string(typeid(*shape).name()), LoggerColors::RED);
+        logger.log(std::cout, "Deleting shape: " + std::string(typeid(*shape).name()), LoggerColors::YELLOW);
         shape.reset();  // Explicitly reset shared_ptr to release resources
     }
 }
 
-void ShapeCollection::add_shape(const std::shared_ptr<Shape>& shape) {
+void ShapeCollection::addShape(const std::shared_ptr<Shape>& shape) {
     shapes.push_back(shape);
     logger.log(std::cout, "Added shape: " + std::string(typeid(*shape).name()) + " with id: " + std::to_string(shape->get_id()), LoggerColors::GREEN);
 }
 
-void ShapeCollection::remove_shape(const int id) {
+void ShapeCollection::removeShape(const int id) {
     for (auto it = shapes.begin(); it != shapes.end(); ++it) {
         if ((*it)->get_id() == id) {
             logger.log(std::cout, "Removing shape with ID: " + std::to_string(id), LoggerColors::YELLOW);
@@ -33,7 +33,7 @@ void ShapeCollection::remove_shape(const int id) {
     }
 }
 
-void ShapeCollection::print_shapes() const {
+void ShapeCollection::printShapes() const {
     for (const auto& shape : shapes) {
         if (dynamic_cast<Rectangle*>(shape.get())) {
             logger.log(std::cout, "Rectangle: " + std::to_string(shape->get_id()), LoggerColors::BLUE);

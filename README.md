@@ -51,4 +51,4 @@ generice.
 - minim 2 design patterns (3 dacă aveți singleton sau ceva la fel de simplu și proiectul e simplu);
   - Singleton ✅ - `Logger`
   - Factory Method ✅ - `ShapeFactory`
-  - Builder
+  - Builder ✅ - `PolygonBuilder`, `CircleBuilder`, `RectangleBuilder`

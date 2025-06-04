@@ -1,6 +1,9 @@
 //
 // Created by matteoverz on 6/2/25.
 //
+#include "../builder/circle_builder.h"
+#include "../builder/polygon_builder.h"
+#include "../builder/rectangle_builder.h"
 #include "../factory/shape_factory.h"
 #include "../include/circle.h"
 #include "../include/rectangle.h"
@@ -10,22 +13,23 @@
 
 int main() {
     ShapeCollection collection;
-    collection.add_shape(std::make_shared<Circle>(5.0));
-    collection.add_shape(std::make_shared<Circle>(5.0));
-    collection.add_shape(std::make_shared<Rectangle>(4.0, 6.0));
+    collection.addShape(std::make_shared<Circle>(5.0));
+    collection.addShape(std::make_shared<Circle>(5.0));
+    collection.addShape(std::make_shared<Rectangle>(4.0, 6.0));
 
-    Circle circle1(std::complex<double>(0, 0), 5.0);
-    Circle circle2(std::complex<double>(0, 0), 5.0);
-    collection.add_shape(std::make_shared<Circle>(circle1));
-    collection.add_shape(std::make_shared<Circle>(circle2));
+    collection.addShape(ShapeFactory::create(CIRCLE));
+    collection.addShape(ShapeFactory::create(RECTANGLE));
+    collection.addShape(ShapeFactory::create(POLYGON));
+    collection.printShapes();
 
-    collection.remove_shape(0);
+    std::unique_ptr<Shape> poly = PolygonBuilder()
+        .addPoint({0, 0})
+        .addPoint({1, 0})
+        .addPoint({1, 1})
+        .addPoint({0, 1})
+        .build();
 
-    collection.print_shapes();
-
-    collection.add_shape(std::shared_ptr<Shape>(ShapeFactory::create(CIRCLE)));
-    collection.add_shape(std::shared_ptr<Shape>(ShapeFactory::create(RECTANGLE)));
-    collection.print_shapes();
-
+    collection.addShape(std::move(poly));
+    collection.printShapes();
     return 0;
 }

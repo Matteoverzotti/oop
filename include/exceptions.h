@@ -12,6 +12,12 @@ public:
         : std::runtime_error(msg) {}
 };
 
+class InvalidPolygonException : public ShapeException {
+public:
+    explicit InvalidPolygonException(const std::string& msg)
+        : ShapeException(msg) {}
+};
+
 class InvalidRadiusException : public ShapeException {
 public:
     explicit InvalidRadiusException(const std::string& msg)

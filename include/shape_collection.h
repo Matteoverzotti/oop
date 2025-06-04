@@ -15,7 +15,7 @@ class ShapeCollection {
 public:
     ~ShapeCollection();
 
-    void add_shape(const std::shared_ptr<Shape>& shape);
-    void remove_shape(int id);
-    void print_shapes() const;
+    void addShape(const std::shared_ptr<Shape>& shape);
+    void removeShape(int id);
+    void printShapes() const;
 };

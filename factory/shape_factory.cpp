@@ -4,14 +4,18 @@
 
 #include "shape_factory.h"
 
-Shape * ShapeFactory::create(const ShapeType type) {
+#include "../builder/circle_builder.h"
+#include "../builder/polygon_builder.h"
+#include "../builder/rectangle_builder.h"
+
+std::unique_ptr<Shape> ShapeFactory::create(const ShapeType type) {
     switch (type) {
         case CIRCLE:
-            return new Circle();
+            return CircleBuilder().build();
         case RECTANGLE:
-            return new Rectangle();
+            return RectangleBuilder().build();
         case POLYGON:
-            return new Polygon();
+            return PolygonBuilder().build();
         default:
             throw std::invalid_argument("Unknown shape type");
     }

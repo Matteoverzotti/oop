@@ -3,6 +3,8 @@
 //
 
 #pragma once
+#include <memory>
+
 #include "../include/shape.h"
 
 enum ShapeType {
@@ -14,5 +16,5 @@ enum ShapeType {
 
 class ShapeFactory {
 public:
-    static Shape* create(ShapeType type);
+    static std::unique_ptr<Shape> create(ShapeType type);
 };
